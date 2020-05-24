@@ -1,3 +1,4 @@
+import 'package:facefinder/screens/background/background_screen.dart';
 import 'package:facefinder/screens/select_pic/select_pic_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:bloc_pattern/bloc_pattern.dart';
@@ -15,11 +16,11 @@ class MyApp extends StatelessWidget {
         title: 'Flutter Demo',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          primaryColor: Colors.lightGreen,
-          accentColor: Colors.greenAccent,
-          brightness: Brightness.dark,
+          primaryColor: Colors.black,
+          accentColor: Colors.yellowAccent,
+          brightness: Brightness.light,
         ),
-        home: SelectPicScreen(),
+        home: BackgroundScreen()
       ),
     );
   }
