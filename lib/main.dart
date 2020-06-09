@@ -1,7 +1,9 @@
+import 'package:facefinder/data_source/aws_source.dart';
 import 'package:facefinder/screens/background/background_screen.dart';
 import 'package:facefinder/screens/select_pic/select_pic_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:bloc_pattern/bloc_pattern.dart';
+import 'package:dio/dio.dart';
 
 import 'blocs/face_finder_bloc.dart';
 
@@ -12,6 +14,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
+      blocs: _blocs,
+      dependencies: _dependencies,
       child: MaterialApp(
         title: 'Flutter Demo',
         debugShowCheckedModeBanner: false,
@@ -26,7 +30,11 @@ class MyApp extends StatelessWidget {
   }
 
   List<Bloc> get _blocs => [
-    Bloc((_) => FaceFindeBloc()),
+    Bloc((i) => FaceFindeBloc(i.get())),
+  ];
+
+  List<Dependency> get _dependencies =>[
+    Dependency((_) => AwsSource(Dio())),
   ];
 
 }

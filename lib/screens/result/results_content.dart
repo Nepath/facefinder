@@ -1,10 +1,15 @@
+import 'dart:typed_data';
+import 'dart:convert';
+import 'package:facefinder/model/person_response.dart';
 import 'package:flutter/material.dart';
+import 'dart:io' as Io;
 
 class ResultContent extends StatefulWidget {
 
   Function newSearch;
+  Function personResponse;
 
-  ResultContent({this.newSearch});
+  ResultContent({this.newSearch, this.personResponse});
 
   @override
   _ResultContentState createState() => _ResultContentState();
@@ -14,7 +19,17 @@ class _ResultContentState extends State<ResultContent> {
 
   Image img = Image.asset("assets/faces1.png", fit: BoxFit.fill,);
 
-  String name = "Imie nazwisko";
+  String name = "Your character name is...";
+  PersonResponse person;
+
+  @override
+  void initState() {
+    this.person = widget.personResponse();
+      Uint8List data =  base64Decode(person.image);
+    img = Image.memory(data, fit: BoxFit.fill,);
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +79,7 @@ class _ResultContentState extends State<ResultContent> {
                   flex: 0,
                   child: Padding(
                       padding: EdgeInsets.all(20),
-                      child: Text("All the signs from the sky tells me that the name of your person is $name", style: TextStyle(fontSize: 20),)
+                      child: Text("Damn, nice picture bro! Wanna search for another guy? ha?", style: TextStyle(fontSize: 20, ),textAlign: TextAlign.center)
                   ),
                 ),
                 Expanded(

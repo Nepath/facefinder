@@ -181,7 +181,7 @@ class _CompleteDataContentState extends State<CompleteDataContent> {
                         child: Padding(
                           padding: EdgeInsets.all(20),
                           child: InkWell(
-                            onTap: (){widget.changePage();},
+                            onTap: (){widget.changePage(_sexIsSelected[1], _skinColor[1]);},
                             child: Container(
                               height: 50,
                               child: Center(child: Text("Confirm")),

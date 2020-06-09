@@ -23,14 +23,18 @@ class _SelectPicContentState extends State<SelectPicContent> {
 
   Future selectImageFromGallery() async{
     var picture = await ImagePicker.pickImage(source: ImageSource.gallery);
-    file = picture;
-    widget.changePage(picture);
+    if(picture!=null) {
+      file = picture;
+      widget.changePage(picture);
+    }
   }
 
   Future selectImageFromCamera() async {
     var picture = await ImagePicker.pickImage(source: ImageSource.camera);
-    file = picture;
-    widget.changePage(picture);
+    if(picture!=null) {
+      file = picture;
+      widget.changePage(picture);
+    }
   }
   
   @override

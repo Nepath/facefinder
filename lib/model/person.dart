@@ -6,17 +6,36 @@ part 'person.g.dart';
 
 @JsonSerializable()
 class Person{
-  int id;
-  String skinColor;
-  String sex;
+
+  @JsonKey(name: 'img')
   String image;
 
-  Person({this.id,this.sex,this.skinColor, File img}){
-    image = base64Encode(img.readAsBytesSync());
+  @JsonKey(name: 'mode')
+  String mode;
+
+  Person({File img, bool sex, bool race}){
+    this.mode = modeSelector(sex, race);
+    final String helper = ",${base64Encode(img.readAsBytesSync())}";
+    this.image = helper;
   }
 
   factory Person.fromJson(Map<String, dynamic> json) => _$PersonFromJson(json);
   Map<String, dynamic> toJson() => _$PersonToJson(this);
+
+  String modeSelector(bool sex, bool race){
+    if(sex && race){
+      return "white_men";
+    }
+    else if (sex && !race){
+      return "other_men";
+    }
+    else if (!sex && race){
+      return "white_women";
+    }
+    else if (!sex && !race){
+      return "other_women";
+    }
+  }
 }
 
 //_image= Image.memory(person.test(picture));
